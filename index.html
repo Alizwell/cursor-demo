@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报名管理系统</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3490dc',
+                        secondary: '#718096'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '2px',
+                        DEFAULT: '4px',
+                        'md': '8px',
+                        'lg': '12px',
+                        'xl': '16px',
+                        '2xl': '20px',
+                        '3xl': '24px',
+                        'full': '9999px',
+                        'button': '4px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            min-height: 1024px;
+            background-color: #f7f7f7;
+        }
+        .container {
+            width: 1440px;
+            margin: 0 auto;
+        }
+        .nav-item {
+            padding: 8px 16px;
+            color: #666;
+            cursor: pointer;
+        }
+        .nav-item:hover,
+        .nav-item.active {
+            color: #3490dc;
+        }
+        .search-input {
+            border: 1px solid #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 4px;
+            background: white;
+        }
+        .search-select {
+            border: 1px solid #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+        }
+        table th {
+            background: #f8fafc;
+            padding: 12px;
+            font-weight: normal;
+            color: #666;
+            text-align: left;
+        }
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: #3490dc;
+            color: white;
+        }
+        .btn-default {
+            background: white;
+            border: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center h-16 border-b">
+            <div class="flex items-center space-x-8">
+                <div class="nav-item active">端外赛事</div>
+                <div class="nav-item">端外赛事列表</div>
+                <div class="nav-item">赛事管理</div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span>薛昊01</span>
+                <i class="fas fa-angle-down"></i>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <h2 class="text-lg font-medium text-blue-500 mb-6">报名管理</h2>
+            
+            <div class="bg-white p-6 rounded-lg">
+                <div class="grid grid-cols-5 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-2">赛项</label>
+                        <div class="search-select flex justify-between items-center">
+                            <span>请选择赛项</span>
+                            <i class="fas fa-angle-down text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-2">学科</label>
+                        <div class="search-select flex justify-between items-center">
+                            <span>请选择学科</span>
+                            <i class="fas fa-angle-down text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-2">组别</label>
+                        <div class="search-select flex justify-between items-center">
+                            <span>请选择组别</span>
+                            <i class="fas fa-angle-down text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-2">报名方式</label>
+                        <div class="search-select flex justify-between items-center">
+                            <span>请选择报名方式</span>
+                            <i class="fas fa-angle-down text-gray-400"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-2">用户ID</label>
+                        <input type="text" class="search-input w-full" placeholder="请输入用户ID">
+                    </div>
+                </div>
+                
+                <div class="flex space-x-4 mb-6">
+                    <div class="w-64">
+                        <label class="block text-sm text-gray-600 mb-2">手机号</label>
+                        <input type="text" class="search-input w-full" placeholder="请输入手机号">
+                    </div>
+                    <div class="w-64">
+                        <label class="block text-sm text-gray-600 mb-2">姓名</label>
+                        <input type="text" class="search-input w-full" placeholder="请输入姓名">
+                    </div>
+                    <div class="flex items-end space-x-2">
+                        <button class="btn btn-primary !rounded-button whitespace-nowrap">查询</button>
+                        <button class="btn btn-default !rounded-button whitespace-nowrap">重置</button>
+                    </div>
+                </div>
+
+                <div class="flex justify-end space-x-2 mb-4">
+                    <button class="btn btn-primary !rounded-button whitespace-nowrap">
+                        <i class="fas fa-download mr-2"></i>导入
+                    </button>
+                    <button class="btn btn-primary !rounded-button whitespace-nowrap">
+                        <i class="fas fa-upload mr-2"></i>导出
+                    </button>
+                </div>
+
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>用户ID</th>
+                            <th>姓名</th>
+                            <th>手机号</th>
+                            <th>赛项</th>
+                            <th>学科</th>
+                            <th>组别</th>
+                            <th>报名方式</th>
+                            <th>报名时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1001</td>
+                            <td>王建国</td>
+                            <td>138****8000</td>
+                            <td>赛事1</td>
+                            <td>学科1-1</td>
+                            <td>组别1-1</td>
+                            <td>用户手动</td>
+                            <td>2023-10-01 10:00:00</td>
+                            <td>
+                                <a href="#" class="text-blue-500 mr-4">查看</a>
+                                <a href="#" class="text-blue-500">编辑</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1002</td>
+                            <td>李志明</td>
+                            <td>138****8001</td>
+                            <td>赛事1</td>
+                            <td>学科1-2</td>
+                            <td>组别1-2</td>
+                            <td>后台导入</td>
+                            <td>2023-10-01 11:00:00</td>
+                            <td>
+                                <a href="#" class="text-blue-500 mr-4">查看</a>
+                                <a href="#" class="text-blue-500">编辑</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="flex justify-between items-center mt-4">
+                    <div class="text-gray-600">共 2 条</div>
+                    <div class="flex items-center space-x-2">
+                        <div class="search-select w-32">
+                            <span>10条/页</span>
+                            <i class="fas fa-angle-down"></i>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <button class="btn btn-default px-3 py-1">前往</button>
+                            <button class="btn btn-default px-3 py-1">1</button>
+                            <button class="btn btn-default px-3 py-1">页</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
